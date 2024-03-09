@@ -1,0 +1,71 @@
+import React from "react";
+import { Button, Fade, Tooltip, Zoom, tooltipClasses } from "@mui/material";
+import { useTheme } from "styled-components";
+
+const Btn = (props) => {
+  const theme = useTheme();
+  const { primary, secondary } = theme.palette;
+
+  const { tooltip_text, onclick, text, sx, type, startIcon } = props;
+  return (
+    <Tooltip
+      TransitionComponent={Zoom}
+      arrow
+      title={tooltip_text}
+      placement="bottom"
+      slotProps={{
+        popper: {
+          sx: {
+            [`&.${tooltipClasses.popper}[data-popper-placement*="bottom"] .${tooltipClasses.tooltip}`]:
+              {
+                marginTop: 0,
+                bgcolor: "black",
+                fontWeight: "bold",
+              },
+            [`&.${tooltipClasses.popper}[data-popper-placement*="top"] .${tooltipClasses.tooltip}`]:
+              {
+                marginBottom: "1px",
+                bgcolor: "black",
+              },
+            [`&.${tooltipClasses.popper}[data-popper-placement*="right"] .${tooltipClasses.tooltip}`]:
+              {
+                marginLeft: "0px",
+                bgcolor: "black",
+              },
+            [`&.${tooltipClasses.popper}[data-popper-placement*="left"] .${tooltipClasses.tooltip}`]:
+              {
+                marginRight: "0px",
+                bgcolor: "black",
+              },
+          },
+        },
+      }}
+    >
+      <Button
+        onClick={onclick}
+        type={type}
+        size="small"
+        startIcon={startIcon}
+        variant="contained"
+        sx={{
+          bgcolor: primary.main,
+
+          color: "black",
+          p: 0.5,
+          fontSize: "x-large",
+          ml: 1,
+          ":hover": { bgcolor: primary.main },
+          "@media(max-width: 500px)": {
+            fontSize: "large",
+            ml: 0.5,
+          },
+          ...sx,
+        }}
+      >
+        {text}
+      </Button>
+    </Tooltip>
+  );
+};
+
+export { Btn };
